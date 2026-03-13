@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  appointment-bot:
+    build: .
+    image: appointment-bot:latest
+    container_name: tls-appointment-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    # Mount a logs directory so you can inspect output from the host
+    volumes:
+      - ./logs:/app/logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
